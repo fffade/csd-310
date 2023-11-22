@@ -7,7 +7,7 @@ from mysql.connector import errorcode
 
 config = {
     "user": "root",
-    "password": "Lo21!#21",  # Password redacted for security reasons
+    "password": "",  # Password redacted for security reasons
     "host": "127.0.0.1",
     "database": "movies",
     "raise_on_warnings": True
