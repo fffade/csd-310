@@ -7,7 +7,7 @@ from mysql.connector import errorcode
 
 config = {
     "user": "root",
-    "password": "Lo21!#21",  # Password redacted for security reasons
+    "password": "",  # Insert Password
     "host": "127.0.0.1",
     "database": "outland_adventures",
     "raise_on_warnings": True
@@ -16,7 +16,6 @@ config = {
 
 # Displays a table regularly in the database
 def show_table(cursor, table_name):
-
     # query
     cursor.execute("SELECT * FROM {};".format(table_name))
 
@@ -36,9 +35,9 @@ def show_table(cursor, table_name):
     for row in rows:
         print(row)
 
+
 # Display a customized output for a table using column names
 def show_table_customized(cursor, table_name, title, column_names):
-
     # query
     cursor.execute("SELECT * FROM {};".format(table_name))
 
@@ -53,7 +52,6 @@ def show_table_customized(cursor, table_name, title, column_names):
 
         col_index = 0
         for column in row:
-
             # display column name alongside entry value
             print("{}: {}".format(column_names[col_index], column.__str__()))
 
@@ -61,11 +59,13 @@ def show_table_customized(cursor, table_name, title, column_names):
 
         print("")
 
+
 # Make connection
 try:
     db = mysql.connector.connect(**config)
 
-    print("\n Database user {} connected to MySQL on host {} with database {}".format(config["user"], config["host"], config["database"]))
+    print("\n Database user {} connected to MySQL on host {} with database {}".format(config["user"], config["host"],
+                                                                                      config["database"]))
 
     input("\n\n Press any key to continue...")
 
@@ -73,7 +73,7 @@ try:
 
     # Show all customers
     show_table_customized(cursor, "customer", "Customers",
-                          ("ID", "First Name", "Last Name", "Email Address"))
+                          ("ID", "Last Name", "First Name", "Email Address"))
 
     print()
 
@@ -81,29 +81,43 @@ try:
     show_table_customized(cursor, "trip", "Trips",
                           ("ID", "Name", "Price", "Length", "Start Date", "Location ID", "Guide ID"))
 
+    print()
+
     # Show all locations
     show_table_customized(cursor, "location", "Locations",
                           ("ID", "Name"))
+
+    print()
 
     # Show all guides
     show_table_customized(cursor, "guide", "Guides",
                           ("ID", "First Name", "Last Name"))
 
+    print()
+
     # Show all bookings
     show_table_customized(cursor, "booking", "Bookings",
                           ("ID", "Date", "Customer ID", "Trip ID"))
+
+    print()
 
     # Show all equipment orders
     show_table_customized(cursor, "equipment_order", "Equipment Orders",
                           ("ID", "Date", "Quantity", "Total"))
 
+    print()
+
     # Show all equipment inventory
     show_table_customized(cursor, "equipment", "Equipment Inventory",
                           ("ID", "Name", "Order ID"))
 
+    print()
+
     # Show all rentals and purchases
     show_table_customized(cursor, "equipment_rental", "Equipment Rentals",
                           ("ID", "Rental Start Date", "Rental End Date", "Rental Total", "Customer ID", "Equipment ID"))
+
+    print()
 
     show_table_customized(cursor, "equipment_purchase", "Equipment Purchases",
                           ("ID", "Purchase Date", "Quantity", "Total", "Customer ID", "Equipment ID"))
